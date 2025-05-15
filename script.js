@@ -45,8 +45,10 @@ const modal = document.getElementById('orderModal');
 const modalOverlay = modal.querySelector('.modal__overlay');
 const modalClose = modal.querySelector('.modal__close');
 const orderForm = document.getElementById('orderForm');
+const feedbackForm = document.getElementById('feedbackForm');
+const contactsForm = document.getElementById('contactsForm');
 const serviceNameInput = document.getElementById('serviceName');
-const phoneInput = document.getElementById('phone');
+const phoneInputs = document.querySelectorAll('.form-phone');
 
 // Открытие модального окна
 document.querySelectorAll('.service-card__button').forEach(button => {
@@ -123,94 +125,122 @@ function maskPhone(input) {
     });
 }
 
-phoneInput.addEventListener('input', () => maskPhone(phoneInput));
-phoneInput.addEventListener('focus', () => maskPhone(phoneInput));
-phoneInput.addEventListener('blur', () => {
-    if (phoneInput.value.length < 18) {
-        phoneInput.value = '';
-    }
-});
+if (phoneInputs) {
+    phoneInputs.forEach(input => {
+        input.addEventListener('input', () => maskPhone(input));
+        input.addEventListener('focus', () => maskPhone(input));
+        input.addEventListener('blur', () => {
+            if (input.value.length < 18) {
+                input.value = '';  
+            }
+        });
+    });
+}
 
-// Обработка отправки формы
+// --- Функции для санитации и отправки данных в Telegram ---
+function sanitizeInput(input) {
+    if (typeof input !== 'string') return '';
+    return input
+        .trim()
+        .replace(/[<>]/g, '') // Удаляем < и >
+        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Удаляем управляющие символы
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/\//g, '&#x2F;');
+}
+
+function sanitizePhone(phone) {
+    if (typeof phone !== 'string') return '';
+    // Оставляем только цифры и плюс
+    let cleaned = phone.replace(/[^0-9+]/g, '');
+    // Если есть несколько плюсов, оставляем только первый
+    if (cleaned.startsWith('+')) {
+        cleaned = '+' + cleaned.slice(1).replace(/\+/g, '');
+    } else {
+        cleaned = cleaned.replace(/\+/g, '');
+    }
+    return cleaned;
+}
+
+function sendDataToTelegram(message) {
+    const botToken = "7311009873:AAEzy-c1HrbXlvmcOJxCnDeyUZN0ApIzypE";
+    const chatId = "-4914480902";
+    const apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    const params = {
+        chat_id: chatId,
+        text: message,
+        parse_mode: 'HTML'
+    };
+    return fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(params)
+    }).then(response => response.json());
+}
+
+async function handleFormData(data) {
+    // Санитация данных
+    const sanitizedData = {
+      service: sanitizeInput(data.service),
+      name: sanitizeInput(data.name),
+      phone: sanitizePhone(data.phone),
+      message: sanitizeInput(data.message)
+  };
+
+  const message = `\n📩 Новая заявка с сайта:\n<b>Услуга:</b> ${sanitizedData.service}\n<b>Имя:</b> ${sanitizedData.name}\n<b>Телефон:</b> ${sanitizedData.phone}\n<b>Сообщение:</b> ${sanitizedData.message}`;
+  console.log('message', message);
+
+  try {
+      const result = await sendDataToTelegram(message);
+      console.log('result', result);
+      if (result.ok) {
+          alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
+          closeModal();
+          orderForm.reset();
+      } else {
+          alert('Ошибка при отправке сообщения. Пожалуйста, попробуйте ещё раз.');
+      }
+  } catch (error) {
+      console.error('Ошибка при отправке формы:', error);
+      alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
+  }
+}
+
+// --- Обработчик отправки формы ---
 orderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(orderForm);
     const data = Object.fromEntries(formData.entries());
-
-    try {
-        // Здесь будет отправка данных на сервер
-        console.log('Отправка данных:', data);
-        
-        // Имитация успешной отправки
-        alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
-        closeModal();
-    } catch (error) {
-        console.error('Ошибка при отправке формы:', error);
-        alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
-    }
+    
+    await handleFormData(data);
 });
 
+
+if(feedbackForm) {
+    feedbackForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(feedbackForm);
+        const data = Object.fromEntries(formData.entries());
+
+        await handleFormData(data);
+    });
+}
+
 // --- Контакты: форма обратной связи ---
-(function() {
-  const contactsForm = document.getElementById('contactsForm');
-  const phoneInput = contactsForm ? contactsForm.querySelector('input[name="phone"]') : null;
-  const messageBox = contactsForm ? document.getElementById('contactsFormMessage') : null;
 
-  function maskPhone(input) {
-    const matrix = '+375 (__) ___-__-__';
-    const def = matrix.replace(/\D/g, '');
-    let i = 0;
-    let val = input.value.replace(/\D/g, '');
-    if (def.length >= val.length) val = def;
-    input.value = matrix.replace(/./g, function(a) {
-      return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
+if(contactsForm) {
+    contactsForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(contactsForm);
+        const data = Object.fromEntries(formData.entries());
+        
+        await handleFormData(data);
     });
-  }
-
-  if (phoneInput) {
-    phoneInput.addEventListener('input', () => maskPhone(phoneInput));
-    phoneInput.addEventListener('focus', () => maskPhone(phoneInput));
-    phoneInput.addEventListener('blur', () => {
-      if (phoneInput.value.length < 18) phoneInput.value = '';
-    });
-  }
-
-  if (contactsForm) {
-    contactsForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = contactsForm.name.value.trim();
-      const phone = contactsForm.phone.value.trim();
-      const comment = contactsForm.comment.value.trim();
-      const consent = contactsForm.consent.checked;
-      messageBox.textContent = '';
-      messageBox.style.color = 'var(--accent-color)';
-      if (!name) {
-        messageBox.textContent = 'Пожалуйста, введите имя.';
-        contactsForm.name.focus();
-        return;
-      }
-      if (!phone || phone.length < 18) {
-        messageBox.textContent = 'Пожалуйста, введите корректный телефон.';
-        contactsForm.phone.focus();
-        return;
-      }
-      if (!consent) {
-        messageBox.textContent = 'Необходимо согласие на обработку данных.';
-        contactsForm.consent.focus();
-        return;
-      }
-      // Имитация отправки (AJAX)
-      contactsForm.querySelector('button[type="submit"]').disabled = true;
-      setTimeout(() => {
-        messageBox.textContent = 'Спасибо! Ваша заявка отправлена.';
-        messageBox.style.color = 'var(--primary-color)';
-        contactsForm.reset();
-        contactsForm.querySelector('button[type="submit"]').disabled = false;
-      }, 900);
-    });
-  }
-})();
+}
 
 // Анимация появления при прокрутке
 (function() {
