@@ -376,17 +376,6 @@ body {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* Main */
-main.main {
-  padding: 0 0 60px;
-}
-
-/* @media screen and (min-width: 768px) {
-  main.main {
-    margin-top: 70px;
-  }
-} */
-
 /* Hero Section */
 .hero {
   padding: 140px 0 40px;
@@ -896,7 +885,8 @@ main.main {
 .workflow__steps {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  column-gap: 24px;
+  row-gap: 48px;
 }
 
 /* Workflow Step */
@@ -2443,7 +2433,6 @@ main.main {
 /* Появление хлебных крошек, SEO-текста, форм */
 .breadcrumbs,
 .contacts-seo-text,
-.feedback,
 .contacts-form-section,
 .service-feedback {
   opacity: 0;
