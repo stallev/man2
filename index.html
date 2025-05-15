@@ -859,7 +859,7 @@
             </p>
             <div class="footer__social">
               <a
-                href="#"
+                href="https://www.instagram.com/Mogilev_manipulator_/"
                 class="footer__social-link footer__social-link--instagram"
                 aria-label="Instagram"
               >
@@ -881,7 +881,7 @@
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://t.me/nikitabus3692"
                 class="footer__social-link footer__social-link--telegram"
                 aria-label="Telegram"
               >
@@ -899,7 +899,7 @@
                 </svg>
               </a>
               <a
-                href="#"
+                href="viber://chat?number=%2B375336585585"
                 class="footer__social-link footer__social-link--viber"
                 aria-label="Viber"
               >
@@ -952,6 +952,11 @@
                   <a href="/services.html" class="footer__nav-link">Услуги</a>
                 </li>
                 <li>
+                  <a href="/price.html" class="footer__nav-link"
+                    >Стоимость</a
+                  >
+                </li>
+                <li>
                   <a href="/equipment.html" class="footer__nav-link"
                     >Наша техника</a
                   >
@@ -967,14 +972,7 @@
               <ul class="footer__nav-list">
                 <li>
                   <a href="/services/gas-silicate.html" class="footer__nav-link"
-                    >Перевозка газосиликатных блоков</a
-                  >
-                </li>
-                <li>
-                  <a
-                    href="/services/car-transport.html"
-                    class="footer__nav-link"
-                    >Перевозка автомобилей</a
+                    >Перевозка стройматериалов</a
                   >
                 </li>
                 <li>
@@ -986,7 +984,7 @@
                   <a
                     href="/services/cabin-transport.html"
                     class="footer__nav-link"
-                    >Перевозка бытовок</a
+                    >Перевозка бытовок и контейнеров</a
                   >
                 </li>
                 <li>
@@ -995,6 +993,13 @@
                     class="footer__nav-link"
                     >Перевозка лесоматериалов</a
                   >
+                </li>
+                <li>
+                <a
+                    href="/services/car-transport.html"
+                    class="footer__nav-link"
+                    >Перевозка автомобилей</a
+                >
                 </li>
                 <li>
                   <a
@@ -1029,7 +1034,7 @@
                 </li>
                 <li>
                   <a
-                    href="mailto:info@manipulator.by"
+                    href="mailto:nikitasergeevich1999@mail.ru"
                     class="footer__nav-link footer__nav-link--contact"
                   >
                     <svg
@@ -1042,7 +1047,7 @@
                         d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
                       />
                     </svg>
-                    info@manipulator.by
+                    nikitasergeevich1999@mail.ru
                   </a>
                 </li>
                 <li>
@@ -1061,7 +1066,7 @@
                         d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
                       />
                     </svg>
-                    г. Могилёв, ул. Примерная, 123
+                    г. Могилёв, ул. Э. Волосевича, 19
                   </a>
                 </li>
               </ul>
@@ -1072,12 +1077,6 @@
         <div class="footer__bottom">
           <div class="footer__copyright">
             © 2024 Аренда манипуляторов. Все права защищены.
-          </div>
-          <div class="footer__links">
-            <a href="/privacy" class="footer__link"
-              >Политика конфиденциальности</a
-            >
-            <a href="/terms" class="footer__link">Условия использования</a>
           </div>
         </div>
       </div>
@@ -1143,7 +1142,39 @@
         </form>
       </div>
     </div>
+    <div class="modal" id="equipmentOrderModal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+            <button class="modal__close" aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+            <h2 class="modal__title">Заказать технику</h2>
+            <form class="modal__form" id="equipmentOrderForm">
+                <input type="hidden" name="equipment" id="equipmentName">
+                <div class="modal__form-group">
+                    <label class="modal__label" for="orderName">Ваше имя</label>
+                    <input type="text" class="modal__input" id="orderName" name="name" required placeholder="Введите ваше имя">
+                </div>
+                <div class="modal__form-group">
+                    <label class="modal__label" for="orderPhone">Телефон</label>
+                    <input type="tel" class="modal__input" id="orderPhone" name="phone" required placeholder="+375 (__) ___-__-__">
+                </div>
+                <div class="modal__form-group">
+                    <label class="modal__label" for="orderMessage">Комментарий</label>
+                    <textarea class="modal__textarea" id="orderMessage" name="message" placeholder="Опишите ваш вопрос или задачу"></textarea>
+                </div>
+                <div class="modal__form-group modal__form-group--checkbox">
+                    <input type="checkbox" class="modal__checkbox" id="orderPrivacy" name="privacy" required>
+                    <label class="modal__label modal__label--checkbox" for="orderPrivacy">Я согласен на обработку персональных данных</label>
+                </div>
+                <button type="submit" class="modal__submit">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
+    <script src="/equipment.js"></script>
   </body>
 </html>
