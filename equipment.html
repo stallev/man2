@@ -507,7 +507,7 @@
               />
             </svg>
           </button>
-          <h2 class="modal__title">Заказать услугу</h2>
+          <h2 class="modal__title">Заказать манипулятор</h2>
           <form class="modal__form" id="orderForm">
             <input type="hidden" name="service" id="serviceName" />
             <div class="modal__form-group">
@@ -557,39 +557,8 @@
           </form>
         </div>
       </div>
-      <div class="modal" id="equipmentOrderModal">
-          <div class="modal__overlay"></div>
-          <div class="modal__container">
-              <button class="modal__close" aria-label="Закрыть">
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                  </svg>
-              </button>
-              <h2 class="modal__title">Заказать технику</h2>
-              <form class="modal__form" id="equipmentOrderForm">
-                  <input type="hidden" name="equipment" id="equipmentName">
-                  <div class="modal__form-group">
-                      <label class="modal__label" for="orderName">Ваше имя</label>
-                      <input type="text" class="modal__input" id="orderName" name="name" required placeholder="Введите ваше имя">
-                  </div>
-                  <div class="modal__form-group">
-                      <label class="modal__label" for="orderPhone">Телефон</label>
-                      <input type="tel" class="modal__input" id="orderPhone" name="phone" required placeholder="+375 (__) ___-__-__">
-                  </div>
-                  <div class="modal__form-group">
-                      <label class="modal__label" for="orderMessage">Комментарий</label>
-                      <textarea class="modal__textarea" id="orderMessage" name="message" placeholder="Опишите ваш вопрос или задачу"></textarea>
-                  </div>
-                  <div class="modal__form-group modal__form-group--checkbox">
-                      <input type="checkbox" class="modal__checkbox" id="orderPrivacy" name="privacy" required>
-                      <label class="modal__label modal__label--checkbox" for="orderPrivacy">Я согласен на обработку персональных данных</label>
-                  </div>
-                  <button type="submit" class="modal__submit">Отправить заявку</button>
-              </form>
-          </div>
-      </div>
-  
-      <script src="script.js"></script>
-      <script src="/equipment.js"></script>
+      
+      <script src="/script.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
     </body>
   </html>
