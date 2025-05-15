@@ -51,6 +51,8 @@ const phoneInput = document.getElementById('phone');
 // Открытие модального окна
 document.querySelectorAll('.service-card__button').forEach(button => {
     button.addEventListener('click', () => {
+        const modalTitle = document.querySelector('.modal__title');
+        modalTitle.textContent = `Заказать услугу`;
         const serviceName = button.dataset.service;
         serviceNameInput.value = serviceName;
         modal.classList.add('active');
@@ -337,4 +339,4 @@ if (document.body.classList.contains('page-animate-in')) {
   }
   // Fancybox инициализация (автоматически по data-fancybox)
   })(); 
-  
+

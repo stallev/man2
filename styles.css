@@ -1971,10 +1971,10 @@ main.main {
   gap: 32px;
   margin-bottom: 40px;
 }
-@media (min-width: 900px) {
+@media (min-width: 768px) {
   .service-row {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 40px;
   }
   .service-process {
