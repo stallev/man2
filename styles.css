@@ -84,7 +84,7 @@ body {
 
 @media screen and (min-width: 1024px) {
   .header__container {
-    max-width: 980px;
+    max-width: 1000px;
   }
 }
 
@@ -133,7 +133,7 @@ body {
 @media screen and (min-width: 550px) {
   .header__phone {
     padding: 8px 16px;
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
