@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"/>
 </head>
 
 <body class="page-animate-in">
@@ -192,9 +193,9 @@
             </div>
         </section>
 
-        <section class="services">
+        <section class="section" id="services">
             <div class="content-container">
-                <h2 class="services__title">Наши услуги</h2>
+                <h2 class="section-title">Наши услуги</h2>
 
                 <div class="services__grid">
                     <article class="service-card animated-fadeInUp card-hover-anim">
@@ -350,9 +351,41 @@
             </div>
         </section>
 
-        <section class="advantages">
+        <section class="section section--gray" id="equipment-gallery">
             <div class="content-container">
-                <h2 class="advantages__title">Почему выбирают нас</h2>
+                <h2 class="section-title">Наша техника</h2>
+                <div class="service-gallery__grid service-gallery__grid--equipment">
+                    <a href="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" data-fancybox="equipment" class="service-gallery__item">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Манипулятор КАМАЗ в горах" class="service-gallery__img" loading="lazy" />
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80" data-fancybox="equipment" class="service-gallery__item">
+                        <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Грузовой кран на строительстве" class="service-gallery__img" loading="lazy" />
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80" data-fancybox="equipment" class="service-gallery__item">
+                        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Манипулятор на фоне неба" class="service-gallery__img" loading="lazy" />
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1523413363574-c30aa1c2a516?auto=format&fit=crop&w=1200&q=80" data-fancybox="equipment" class="service-gallery__item">
+                        <img src="https://images.unsplash.com/photo-1523413363574-c30aa1c2a516?auto=format&fit=crop&w=400&q=80" alt="Погрузка строительных материалов" class="service-gallery__img" loading="lazy" />
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80" data-fancybox="equipment" class="service-gallery__item">
+                        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=400&q=80" alt="Манипулятор на стройке" class="service-gallery__img" loading="lazy" />
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1468421870903-4df1664ac249?auto=format&fit=crop&w=1200&q=80" data-fancybox="equipment" class="service-gallery__item">
+                        <img src="https://images.unsplash.com/photo-1468421870903-4df1664ac249?auto=format&fit=crop&w=400&q=80" alt="Грузовой автомобиль с краном" class="service-gallery__img" loading="lazy" />
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1200&q=80" data-fancybox="equipment" class="service-gallery__item">
+                        <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80" alt="Манипулятор на объекте" class="service-gallery__img" loading="lazy" />
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1465101178521-c1a9136a3fd9?auto=format&fit=crop&w=1200&q=80" data-fancybox="equipment" class="service-gallery__item">
+                        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3fd9?auto=format&fit=crop&w=400&q=80" alt="Современная техника для перевозок" class="service-gallery__img" loading="lazy" />
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="advantages">
+            <div class="content-container">
+                <h2 class="section-title">Почему выбирают нас</h2>
 
                 <div class="advantages__grid">
                     <article class="advantage-card animated-fadeInUp card-hover-anim">
@@ -420,9 +453,9 @@
             </div>
         </section>
 
-        <section class="workflow">
+        <section class="section section--gray" id="workflow">
             <div class="content-container">
-                <h2 class="workflow__title">Как мы работаем</h2>
+                <h2 class="section-title">Как мы работаем</h2>
                 <div class="workflow__steps">
                     <article class="workflow-step animated-fadeInUp card-hover-anim">
                         <div class="workflow-step__number">01</div>
@@ -491,10 +524,10 @@
             </div>
         </section>
 
-        <section class="feedback">
+        <section class="section" id="feedback">
             <div class="content-container">
                 <div class="feedback__content">
-                    <h2 class="feedback__title">Остались вопросы?</h2>
+                    <h2 class="section-title">Остались вопросы?</h2>
                     <p class="feedback__subtitle">
                         Оставьте заявку, и мы свяжемся с вами в ближайшее время
                     </p>
