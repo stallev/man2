@@ -2,7 +2,6 @@ db.php
 /database/
 /mu-plugins/
 /uploads/
-/vendor/
 /build
 /wp-content/languages/
 /wp-content/plugins/
@@ -25,6 +24,7 @@ wp-comments-post.php
 wp-comments.php
 wp-cron.php
 !/wp-content/themes/.gitignore
+!/wp-content/themes/customtheme/libs/carbon-fields/vendor/autoload.php
 
 *.tar
 *.tar.gz
