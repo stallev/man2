@@ -181,7 +181,7 @@ function sendDataToTelegram(message) {
     }).then(response => response.json());
 }
 
-async function handleFormData(data) {
+async function handleFormData(data, form) {
     // Санитация данных
     const sanitizedData = {
       service: sanitizeInput(data.service),
@@ -199,7 +199,7 @@ async function handleFormData(data) {
       if (result.ok) {
           alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
           closeModal();
-          orderForm.reset();
+          form.reset();
       } else {
           alert('Ошибка при отправке сообщения. Пожалуйста, попробуйте ещё раз.');
       }
@@ -216,7 +216,7 @@ orderForm.addEventListener('submit', async (e) => {
     const formData = new FormData(orderForm);
     const data = Object.fromEntries(formData.entries());
     
-    await handleFormData(data);
+    await handleFormData(data, orderForm);
 });
 
 
@@ -226,7 +226,7 @@ if(feedbackForm) {
         const formData = new FormData(feedbackForm);
         const data = Object.fromEntries(formData.entries());
 
-        await handleFormData(data);
+        await handleFormData(data, feedbackForm);
     });
 }
 
@@ -238,7 +238,7 @@ if(contactsForm) {
         const formData = new FormData(contactsForm);
         const data = Object.fromEntries(formData.entries());
         
-        await handleFormData(data);
+        await handleFormData(data, contactsForm);
     });
 }
 

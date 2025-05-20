@@ -54,6 +54,80 @@ function crb_register_common_fields() {
 				->set_default_value('viber://chat?number=%2B375336585585'),
 			Field::make('text', 'crf_social_viber_icon', 'SVG иконка Viber')
 				->set_default_value('https://www.instagram.com/Mogilev_manipulator_/'),
+		))
+		->add_tab('Формы обратной связи', array(
+			Field::make('text', 'crf_modal_title', __('Заголовок формы', 'customtheme'))
+				->set_default_value('Заказать манипулятор')
+				->set_help_text(__('Заголовок модальной формы заказа', 'customtheme')),
+			
+			Field::make('text', 'crf_modal_name_label', __('Метка поля имени', 'customtheme'))
+				->set_default_value('Ваше имя')
+				->set_help_text(__('Текст метки для поля ввода имени', 'customtheme')),
+			
+			Field::make('text', 'crf_modal_name_placeholder', __('Плейсхолдер поля имени', 'customtheme'))
+				->set_default_value('Введите ваше имя')
+				->set_help_text(__('Текст подсказки в поле ввода имени', 'customtheme')),
+			
+			Field::make('text', 'crf_modal_phone_label', __('Метка поля телефона', 'customtheme'))
+				->set_default_value('Телефон')
+				->set_help_text(__('Текст метки для поля ввода телефона', 'customtheme')),
+			
+			Field::make('text', 'crf_modal_phone_placeholder', __('Плейсхолдер поля телефона', 'customtheme'))
+				->set_default_value('+375 (__) ___-__-__')
+				->set_help_text(__('Текст подсказки в поле ввода телефона', 'customtheme')),
+			
+			Field::make('text', 'crf_modal_message_label', __('Метка поля комментария', 'customtheme'))
+				->set_default_value('Комментарий')
+				->set_help_text(__('Текст метки для поля ввода комментария', 'customtheme')),
+			
+			Field::make('text', 'crf_modal_message_placeholder', __('Плейсхолдер поля комментария', 'customtheme'))
+				->set_default_value('Опишите ваш вопрос или задачу')
+				->set_help_text(__('Текст подсказки в поле ввода комментария', 'customtheme')),
+			
+			Field::make('text', 'crf_modal_privacy_label', __('Текст согласия', 'customtheme'))
+				->set_default_value('Я согласен на обработку персональных данных')
+				->set_help_text(__('Текст согласия на обработку персональных данных', 'customtheme')),
+			
+			Field::make('text', 'crf_modal_submit_text', __('Текст кнопки отправки', 'customtheme'))
+				->set_default_value('Отправить заявку')
+				->set_help_text(__('Текст на кнопке отправки формы', 'customtheme')),
+		))
+		->add_tab('Форма на странице услуги', array(
+			Field::make('text', 'crf_service_form_title', __('Заголовок формы', 'customtheme'))
+				->set_default_value('Оставьте заявку')
+				->set_help_text(__('Заголовок формы на странице услуги', 'customtheme')),
+			
+			Field::make('text', 'crf_service_form_name_label', __('Метка поля имени', 'customtheme'))
+				->set_default_value('Ваше имя')
+				->set_help_text(__('Текст метки для поля ввода имени', 'customtheme')),
+			
+			Field::make('text', 'crf_service_form_name_placeholder', __('Плейсхолдер поля имени', 'customtheme'))
+				->set_default_value('Введите ваше имя')
+				->set_help_text(__('Текст подсказки в поле ввода имени', 'customtheme')),
+			
+			Field::make('text', 'crf_service_form_phone_label', __('Метка поля телефона', 'customtheme'))
+				->set_default_value('Телефон')
+				->set_help_text(__('Текст метки для поля ввода телефона', 'customtheme')),
+			
+			Field::make('text', 'crf_service_form_phone_placeholder', __('Плейсхолдер поля телефона', 'customtheme'))
+				->set_default_value('+375 (__) ___-__-__')
+				->set_help_text(__('Текст подсказки в поле ввода телефона', 'customtheme')),
+			
+			Field::make('text', 'crf_service_form_message_label', __('Метка поля комментария', 'customtheme'))
+				->set_default_value('Комментарий')
+				->set_help_text(__('Текст метки для поля ввода комментария', 'customtheme')),
+			
+			Field::make('text', 'crf_service_form_message_placeholder', __('Плейсхолдер поля комментария', 'customtheme'))
+				->set_default_value('Опишите ваш вопрос или задачу')
+				->set_help_text(__('Текст подсказки в поле ввода комментария', 'customtheme')),
+			
+			Field::make('text', 'crf_service_form_privacy_label', __('Текст согласия', 'customtheme'))
+				->set_default_value('Я согласен на обработку персональных данных')
+				->set_help_text(__('Текст согласия на обработку персональных данных', 'customtheme')),
+			
+			Field::make('text', 'crf_service_form_submit_text', __('Текст кнопки отправки', 'customtheme'))
+				->set_default_value('Отправить заявку')
+				->set_help_text(__('Текст на кнопке отправки формы', 'customtheme')),
 		));
 }
 
