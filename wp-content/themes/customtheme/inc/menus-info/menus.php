@@ -28,6 +28,8 @@ add_action('after_setup_theme', 'customtheme_register_menus');
 function customtheme_menu_classes($classes, $item, $args) {
     if ($args->theme_location === 'header_menu') {
         $classes[] = 'header__menu-item';
+    } elseif ($args->theme_location === 'footer_nav' || $args->theme_location === 'footer_services') {
+        $classes[] = '';
     }
     return $classes;
 }
@@ -39,6 +41,8 @@ add_filter('nav_menu_css_class', 'customtheme_menu_classes', 10, 3);
 function customtheme_menu_link_classes($atts, $item, $args) {
     if ($args->theme_location === 'header_menu') {
         $atts['class'] = 'header__menu-link';
+    } elseif ($args->theme_location === 'footer_nav' || $args->theme_location === 'footer_services') {
+        $atts['class'] = 'footer__nav-link';
     }
     return $atts;
 }
@@ -66,7 +70,7 @@ function customtheme_footer_nav() {
         'theme_location' => 'footer_nav',
         'container' => 'nav',
         'container_class' => 'footer__nav',
-        'menu_class' => 'footer__menu',
+        'menu_class' => 'footer__nav-list',
         'fallback_cb' => false,
         'depth' => 1
     ));
@@ -80,7 +84,7 @@ function customtheme_footer_services() {
         'theme_location' => 'footer_services',
         'container' => 'nav',
         'container_class' => 'footer__services',
-        'menu_class' => 'footer__services-menu',
+        'menu_class' => 'footer__nav-list',
         'fallback_cb' => false,
         'depth' => 1
     ));

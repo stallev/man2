@@ -9,6 +9,7 @@ require_once('theme-fields/Crb_All_Fields.php');
 add_action( 'carbon_fields_register_fields', 'carbon_fields_settings_common' );
 function carbon_fields_settings_common() {
     $Container = new Crb_All_Fields('theme_options', 'Настройка сайта');
-    $Container->settings_common();
+    $Container->add_contact_fields();
+    $Container->add_social_fields();
     return $Container;
 }

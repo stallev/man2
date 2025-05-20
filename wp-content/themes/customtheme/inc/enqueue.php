@@ -25,12 +25,29 @@ if ( ! function_exists( 'customtheme_scripts' ) ) {
             $theme_version
         );
 
+        // Подключение Fancybox CSS
+        wp_enqueue_style(
+            'fancybox-css',
+            'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css',
+            array(),
+            '5.0.0'
+        );
+
         // Подключение скриптов
         wp_enqueue_script(
             'customtheme-script',
             get_template_directory_uri() . '/assets/js/script.js',
             array('jquery'),
             $theme_version,
+            true
+        );
+
+        // Подключение Fancybox JS
+        wp_enqueue_script(
+            'fancybox-js',
+            'https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js',
+            array(),
+            '5.0.0',
             true
         );
     }

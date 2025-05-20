@@ -45,3 +45,8 @@ add_filter('mime_types', 'webp_upload_mimes');
 @ini_set('upload_max_size', '900M');
 @ini_set('post_max_size', '900M');
 @ini_set('max_execution_time', '300');
+
+/**
+ * Подключение файлов с кастомными типами постов
+ */
+require_once get_template_directory() . '/inc/custom_posts/service_post.php';
