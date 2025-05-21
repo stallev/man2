@@ -116,6 +116,10 @@ function customtheme_service_fields() {
             Field::make('textarea', 'crf_service_price_note', __('Примечание к стоимости', 'customtheme'))
                 ->set_help_text(__('Дополнительная информация о стоимости', 'customtheme'))
                 ->set_visible_in_rest_api(true),
+            
+            Field::make('text', 'crf_service_order_button_label', __('Текст кнопки заказа', 'customtheme'))
+                ->set_help_text(__('Текст кнопки заказа', 'customtheme'))
+                ->set_visible_in_rest_api(true),
         ))
         ->add_tab(__('Галерея', 'customtheme'), array(
             Field::make('complex', 'crf_service_gallery', __('Галерея изображений', 'customtheme'))
