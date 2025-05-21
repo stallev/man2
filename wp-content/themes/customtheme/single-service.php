@@ -10,8 +10,8 @@ get_header();
             <nav class="breadcrumbs">
                 <ul class="breadcrumbs__list">
                     <li class="breadcrumbs__item"><a href="/" class="breadcrumbs__link">Главная</a></li>
-                    <li class="breadcrumbs__item"><a href="/services.html" class="breadcrumbs__link">Услуги</a></li>
-                    <li class="breadcrumbs__item"><span class="breadcrumbs__current">Перевозка газосиликатных блоков</span></li>
+                    <li class="breadcrumbs__item"><a href="<?php echo home_url('/services-list'); ?>" class="breadcrumbs__link">Услуги</a></li>
+                    <li class="breadcrumbs__item"><span class="breadcrumbs__current"><?php the_title(); ?></span></li>
                 </ul>
             </nav>
             <h1 class="service-title"><?php the_title(); ?></h1>
@@ -98,31 +98,7 @@ get_header();
             </section>
             <section class="service-feedback">
                 <h2 class="section-title"><?php echo esc_html(carbon_get_theme_option('crf_service_form_title')); ?></h2>
-                <form class="feedback-form" id="feedbackForm">
-                <input type="hidden" name="service" id="serviceName" value="<?php echo esc_attr(get_the_title()); ?>" />
-                    <div class="feedback-form__group">
-                        <label class="feedback-form__label" for="nameService"><?php echo esc_html(carbon_get_theme_option('crf_service_form_name_label')); ?></label>
-                        <input type="text" class="feedback-form__input" id="nameService" name="name" required 
-                            placeholder="<?php echo esc_attr(carbon_get_theme_option('crf_service_form_name_placeholder')); ?>">
-                    </div>
-                    <div class="feedback-form__group">
-                        <label class="feedback-form__label" for="phoneService"><?php echo esc_html(carbon_get_theme_option('crf_service_form_phone_label')); ?></label>
-                        <input type="tel" class="feedback-form__input form-phone" name="phone" required 
-                            placeholder="<?php echo esc_attr(carbon_get_theme_option('crf_service_form_phone_placeholder')); ?>">
-                    </div>
-                    <div class="feedback-form__group">
-                        <label class="feedback-form__label" for="messageService"><?php echo esc_html(carbon_get_theme_option('crf_service_form_message_label')); ?></label>
-                        <textarea class="feedback-form__textarea" id="messageService" name="message" 
-                            placeholder="<?php echo esc_attr(carbon_get_theme_option('crf_service_form_message_placeholder')); ?>"></textarea>
-                    </div>
-                    <div class="feedback-form__group feedback-form__group--checkbox">
-                        <input type="checkbox" class="feedback-form__checkbox" id="privacyService" name="privacy" required>
-                        <label class="feedback-form__label feedback-form__label--checkbox" for="privacyService">
-                            <?php echo esc_html(carbon_get_theme_option('crf_service_form_privacy_label')); ?>
-                        </label>
-                    </div>
-                    <button type="submit" class="feedback-form__submit"><?php echo esc_html(carbon_get_theme_option('crf_service_form_submit_text')); ?></button>
-                </form>
+                <?php get_template_part('template-parts/feedback-form'); ?>
             </section>
         </div>
     </main>

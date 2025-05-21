@@ -128,6 +128,17 @@ function crb_register_common_fields() {
 			Field::make('text', 'crf_service_form_submit_text', __('Текст кнопки отправки', 'customtheme'))
 				->set_default_value('Отправить заявку')
 				->set_help_text(__('Текст на кнопке отправки формы', 'customtheme')),
+		))
+		->add_tab('Активные услуги', array(
+			Field::make('association', 'crf_active_services', 'Активные услуги')
+				->set_types(array(
+					array(
+						'type'      => 'post',
+						'post_type' => 'service',
+					),
+				))
+				->set_max(20)
+				->set_help_text('Выберите и отсортируйте услуги, которые должны отображаться на странице. Только отмеченные услуги будут видны посетителям.')
 		));
 }
 

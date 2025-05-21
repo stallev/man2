@@ -33,6 +33,7 @@ add_theme_support('post-thumbnails', array('post', 'upcoming_event'));
 add_action('carbon_fields_register_fields', 'create_faq_fields');
 
 require_once('inc/menus-info/menus.php');
+require_once('inc/pages-data/pages-data-index.php');
 
 function webp_upload_mimes($existing_mimes)
 {

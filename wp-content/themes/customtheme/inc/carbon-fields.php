@@ -1,6 +1,8 @@
 <?php
 
-require_once('all-fields/Crb_All_Fields.php');
+// require_once('all-fields/Crb_All_Fields.php');
+
+require_once get_template_directory() . '/inc/pages-data/home-page.php';
 
 // Common Settings
 add_action( 'carbon_fields_register_fields', 'carbon_fields_settings_common' );
@@ -14,7 +16,7 @@ function carbon_fields_settings_common() {
 //home.php
 add_action( 'carbon_fields_register_fields', 'carbon_fields_page_main' );
 function carbon_fields_page_main() {
-    $Container = new Crb_All_Fields_Page('post_meta', 'Настройки страницы', 'template-pages/home.php');
+    $Container = new Crb_All_Fields_Page_Home('post_meta', 'Настройки страницы', 'template-pages/home.php');
     $Container->theme_land_main();
     return $Container;
 }
