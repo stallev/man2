@@ -28,7 +28,7 @@ function create_faq_fields()
         ));
 }
 
-add_theme_support('post-thumbnails', array('post', 'upcoming_event'));
+add_theme_support('post-thumbnails', array('post', 'page'));
 
 add_action('carbon_fields_register_fields', 'create_faq_fields');
 
@@ -51,3 +51,5 @@ add_filter('mime_types', 'webp_upload_mimes');
  * Подключение файлов с кастомными типами постов
  */
 require_once get_template_directory() . '/inc/custom_posts/service_post.php';
+
+remove_action('wp_head', 'wp_generator');
