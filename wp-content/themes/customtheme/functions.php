@@ -53,3 +53,6 @@ add_filter('mime_types', 'webp_upload_mimes');
 require_once get_template_directory() . '/inc/custom_posts/service_post.php';
 
 remove_action('wp_head', 'wp_generator');
+
+define('AUTOMATIC_UPDATER_DISABLED', true); // Отключает все автообновления
+define('WP_AUTO_UPDATE_CORE', false);       // Отключает автообновление ядра

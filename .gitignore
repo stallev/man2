@@ -4,6 +4,7 @@ db.php
 /uploads/
 /build
 /wp-content/languages/
+/wp-content/backups-dup-lite/
 /wp-content/plugins/
 /wp-content/uploads/
 /wp-content/index.php
