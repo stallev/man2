@@ -1,12 +1,24 @@
 <?php
-const TELEGRAM_BOT_TOKEN = '6182946148:AAHBsB65GX4If11WzjMWsQuODrcOKmiMs-o';
-const TELEGRAM_CHAT_ID   = '-1001964614294';
+const TELEGRAM_BOT_TOKEN = '7311009873:AAEzy-c1HrbXlvmcOJxCnDeyUZN0ApIzypE';
+const TELEGRAM_CHAT_ID   = '-4914480902';
+
+function sanitizePhone($phone) {
+    if (!is_string($phone)) return '';
+    $cleaned = preg_replace('/[^0-9+]/', '', $phone);
+    if (strpos($cleaned, '+') === 0) {
+        $cleaned = '+' . str_replace('+', '', substr($cleaned, 1));
+    } else {
+        $cleaned = str_replace('+', '', $cleaned);
+    }
+    return $cleaned;
+}
 
 function sendDataToTelegram($message) {
   $telegram_url  = 'https://api.telegram.org/bot' . TELEGRAM_BOT_TOKEN . '/sendMessage';
   $telegram_data = [
     'chat_id' => TELEGRAM_CHAT_ID,
     'text'    => $message,
+    'parse_mode' => 'HTML',
   ];
 
   $args = [
@@ -29,33 +41,17 @@ function sendDataToTelegram($message) {
   }
 }
 
-// Обработка submit формы
 if ( $_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(isset( $_POST['contact_form1'] )) {
-    $name    = sanitize_text_field( $_POST['person-name'] );
-    $phone   = sanitize_text_field( $_POST['person-phone'] );
-    $personMessage   = sanitize_text_field( $_POST['person-message'] );
-    $message = "Запрос на консультацию из формы секции контактов:
+  if(isset( $_POST['privacy'] )) {
+    $name    = sanitize_text_field( $_POST['name'] );
+    $phone   = sanitizePhone( sanitize_text_field( $_POST['phone'] ) );
+    $service   = sanitize_text_field( $_POST['service'] );
+    $personMessage   = sanitize_text_field( $_POST['message'] );
+    $message = "\n📩 Новая заявка с сайта:
       \nИмя клиента: $name
       \nТелефон клиента: $phone
+      \nУслуга или страница: $service
       \nСообщение от клиента: $personMessage
-      ";
-    // Отправка сообщения в Telegram
-    sendDataToTelegram($message);
-  }
-}
-
-if ( $_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(isset( $_POST['modal_contact_form'] )) {
-    $name    = sanitize_text_field( $_POST['person-name'] );
-    $phone   = sanitize_text_field( $_POST['person-phone'] );
-    $personMessage   = sanitize_text_field( $_POST['person-message'] );
-    $requestType   = sanitize_text_field( $_POST['type'] );
-    $message = "Запрос на консультацию из модальной формы:
-      \nИмя клиента: $name
-      \nТелефон клиента: $phone
-      \nСообщение от клиента: $personMessage
-      \nВид заявки: $requestType
       ";
     // Отправка сообщения в Telegram
     sendDataToTelegram($message);

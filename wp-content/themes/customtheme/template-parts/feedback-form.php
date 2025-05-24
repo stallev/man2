@@ -1,4 +1,4 @@
-<form class="feedback-form" id="feedbackForm">
+<form class="feedback-form" id="feedbackForm" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" method="POST">
 <input type="hidden" name="service" id="serviceName" value="<?php echo esc_attr(get_the_title()); ?>" />
     <div class="feedback-form__group">
         <label class="feedback-form__label" for="nameService"><?php echo esc_html(carbon_get_theme_option('crf_service_form_name_label')); ?></label>

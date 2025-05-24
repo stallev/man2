@@ -11,7 +11,7 @@
                         // Fallback SVG logo if no image is set
                         ?>
                         <svg class="footer__logo-img" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
-                            <rect width="200" height="200" fill="url('#gradient')"></rect>
+                            <rect width="200" height="200" fill="#1a1a1a"></rect>
                             <defs>
                                 <linearGradient id="gradient" gradientTransform="rotate(45 0.5 0.5)">
                                     <stop offset="0%" stop-color="#ffffff"></stop>
@@ -180,8 +180,8 @@
             </svg>
         </button>
         <h2 class="modal__title">Заказать манипулятор</h2>
-        <form class="modal__form" id="orderForm">
-            <input type="hidden" name="service" id="serviceName" />
+        <form class="modal__form" id="orderForm" action="<?php echo esc_url(admin_url('admin-ajax.php')); ?>" method="POST">
+            <input type="hidden" name="service" id="serviceName" value="" />
             <div class="modal__form-group">
                 <label class="modal__label" for="name">Ваше имя</label>
                 <input type="text" class="modal__input" id="name" name="name" required

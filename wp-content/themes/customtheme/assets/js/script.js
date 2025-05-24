@@ -48,6 +48,7 @@ const orderForm = document.getElementById('orderForm');
 const feedbackForm = document.getElementById('feedbackForm');
 const contactsForm = document.getElementById('contactsForm');
 const serviceNameInput = document.getElementById('serviceName');
+const modalServiceNameInput = modal.querySelector('input[name="service"]');
 const phoneInputs = document.querySelectorAll('.form-phone');
 
 // Открытие модального окна
@@ -56,16 +57,7 @@ document.querySelectorAll('.service-card__button').forEach(button => {
         const modalTitle = document.querySelector('.modal__title');
         modalTitle.textContent = `Заказать услугу`;
         const serviceName = button.dataset.service;
-        serviceNameInput.value = serviceName;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-});
-
-document.querySelectorAll('.header__order-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        const serviceName = 'Заказать услугу';
-        serviceNameInput.value = serviceName;
+        modalServiceNameInput.value = serviceName;
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     });
@@ -74,7 +66,7 @@ document.querySelectorAll('.header__order-btn').forEach(button => {
 document.querySelectorAll('.hero__button').forEach(button => {
     button.addEventListener('click', () => {
         const serviceName = 'Заказ манипулятора с первого экрана первой страницы';
-        serviceNameInput.value = serviceName;
+        modalServiceNameInput.value = serviceName;
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     });
@@ -86,7 +78,7 @@ document.querySelectorAll('.equipment-card__order-btn').forEach(button => {
         const modalTitle = document.querySelector('.modal__title');
         modalTitle.textContent = `Заказать манипулятор ${equipmentName}`;
         const serviceName = `Заказ конретной модели манипулятора: ${equipmentName} `;
-        serviceNameInput.value = serviceName;
+        modalServiceNameInput.value = serviceName;
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     });
@@ -137,109 +129,40 @@ if (phoneInputs) {
     });
 }
 
-// --- Функции для санитации и отправки данных в Telegram ---
-function sanitizeInput(input) {
-    if (typeof input !== 'string') return '';
-    return input
-        .trim()
-        .replace(/[<>]/g, '') // Удаляем < и >
-        .replace(/[\u0000-\u001F\u007F-\u009F]/g, '') // Удаляем управляющие символы
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#x27;')
-        .replace(/\//g, '&#x2F;');
-}
-
-function sanitizePhone(phone) {
-    if (typeof phone !== 'string') return '';
-    // Оставляем только цифры и плюс
-    let cleaned = phone.replace(/[^0-9+]/g, '');
-    // Если есть несколько плюсов, оставляем только первый
-    if (cleaned.startsWith('+')) {
-        cleaned = '+' + cleaned.slice(1).replace(/\+/g, '');
-    } else {
-        cleaned = cleaned.replace(/\+/g, '');
-    }
-    return cleaned;
-}
-
-function sendDataToTelegram(message) {
-    const botToken = "7311009873:AAEzy-c1HrbXlvmcOJxCnDeyUZN0ApIzypE";
-    const chatId = "-4914480902";
-    const apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    const params = {
-        chat_id: chatId,
-        text: message,
-        parse_mode: 'HTML'
-    };
-    return fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(params)
-    }).then(response => response.json());
-}
-
-async function handleFormData(data, form) {
-    // Санитация данных
-    const sanitizedData = {
-      service: sanitizeInput(data.service),
-      name: sanitizeInput(data.name),
-      phone: sanitizePhone(data.phone),
-      message: sanitizeInput(data.message)
-  };
-
-  const message = `\n📩 Новая заявка с сайта:\n<b>Услуга:</b> ${sanitizedData.service}\n<b>Имя:</b> ${sanitizedData.name}\n<b>Телефон:</b> ${sanitizedData.phone}\n<b>Сообщение:</b> ${sanitizedData.message}`;
-  console.log('message', message);
-
-  try {
-      const result = await sendDataToTelegram(message);
-      console.log('result', result);
-      if (result.ok) {
-          alert('Спасибо! Ваша заявка принята. Мы свяжемся с вами в ближайшее время.');
-          closeModal();
-          form.reset();
-      } else {
-          alert('Ошибка при отправке сообщения. Пожалуйста, попробуйте ещё раз.');
-      }
-  } catch (error) {
-      console.error('Ошибка при отправке формы:', error);
-      alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
-  }
-}
-
 // --- Обработчик отправки формы ---
 orderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(orderForm);
-    const data = Object.fromEntries(formData.entries());
-    
-    await handleFormData(data, orderForm);
+    await handleFormData(orderForm);
 });
-
 
 if(feedbackForm) {
     feedbackForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData(feedbackForm);
-        const data = Object.fromEntries(formData.entries());
 
-        await handleFormData(data, feedbackForm);
+        await handleFormData(feedbackForm);
     });
 }
 
-// --- Контакты: форма обратной связи ---
+async function handleFormData(form) {
+    const formData = new FormData(form);
+    try {
+        const response = await fetch(feedbackForm.action, {
+            method: 'POST',
+            body: formData,
+        });
 
-if(contactsForm) {
-    contactsForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(contactsForm);
-        const data = Object.fromEntries(formData.entries());
-        
-        await handleFormData(data, contactsForm);
-    });
+        const result = await response.json();
+
+        if (result.success) {
+            alert(result.message || 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
+            feedbackForm.reset();
+        } else {
+            alert(result.message || 'Ошибка при отправке сообщения. Пожалуйста, попробуйте ещё раз.');
+        }
+    } catch (error) {
+        alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
+    }
 }
 
 // Анимация появления при прокрутке
@@ -336,17 +259,6 @@ if (document.body.classList.contains('page-animate-in')) {
       phoneInput.addEventListener('focus', () => maskPhone(phoneInput));
       phoneInput.addEventListener('blur', () => {
           if (phoneInput.value.length < 18) phoneInput.value = '';
-      });
-  }
-  
-  function maskPhone(input) {
-      const matrix = '+375 (__) ___-__-__';
-      const def = matrix.replace(/\D/g, '');
-      let i = 0;
-      let val = input.value.replace(/\D/g, '');
-      if (def.length >= val.length) val = def;
-      input.value = matrix.replace(/./g, function(a) {
-          return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
       });
   }
   
