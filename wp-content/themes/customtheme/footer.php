@@ -157,7 +157,7 @@
                     );
                 }
                 ?>
-                <div class="footer__company-info">ИП Леоненко Н.С.  УНП 123456789</div>
+                <div class="footer__company-info">ИП Леоненко Н.С.  УНП <?php echo esc_html(carbon_get_theme_option('crf_owner_unp')); ?></div>
             </div>
             <div class="footer__policy">
                 <?php if ($privacy_policy = carbon_get_theme_option('crf_privacy_policy_link')): ?>

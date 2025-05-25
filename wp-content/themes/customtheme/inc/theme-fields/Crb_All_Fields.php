@@ -259,6 +259,25 @@ function crb_register_common_fields() {
 				->set_default_value('<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aexample&amp;source=constructor&amp;width=100%25&amp;height=320&amp;lang=ru_RU&amp;scroll=false&amp;ll=30.265652,53.913507&amp;z=16&amp;pt=30.265652,53.913507,pm2rdm" width="100%" height="320" frameborder="0" allowfullscreen title="Карта проезда" class="contacts-map__iframe"></iframe>'),
 			Field::make('textarea', 'crf_contacts_seo_text', 'SEO-текст')
 				->set_default_value('Свяжитесь с нами для заказа манипулятора в Могилёве и области. Мы оперативно ответим на все вопросы, подберём оптимальную технику и предложим выгодные условия сотрудничества. Работаем с частными и корпоративными клиентами, гарантируем прозрачность и профессионализм на каждом этапе.'),
+
+			// Группа: Информация об ИП
+			Field::make('html', 'group_owner_info_title')->set_html('<h3 style="margin-top:2em;">Информация об индивидуальном предпринимателе</h3>'),
+			Field::make('text', 'crf_owner_fullname', 'Полное наименование ИП (ФИО)')
+				->set_default_value('Иванов Иван Иванович'),
+			Field::make('text', 'crf_owner_legal_address', 'Юридический адрес')
+				->set_default_value('220000, г. Минск, ул. Примерная, д. 1, кв. 1'),
+			Field::make('text', 'crf_owner_actual_address', 'Фактический адрес')
+				->set_default_value('220000, г. Минск, ул. Примерная, д. 1, кв. 1'),
+			Field::make('text', 'crf_owner_registration_info', 'Сведения о гос. регистрации')
+				->set_default_value('Зарегистрирован Минским горисполкомом 01.01.2020 г.'),
+			Field::make('text', 'crf_owner_unp', 'УНП')
+				->set_default_value('123456789'),
+			Field::make('text', 'crf_owner_payment_methods', 'Способы оплаты')
+				->set_default_value('Наличный расчет, банковские карты, ЕРИП'),
+			Field::make('image', 'crf_owner_receipt_sample', 'Образец кассового чека')
+				->set_value_type('url'),
+			Field::make('textarea', 'crf_owner_bank_details', 'Банковские реквизиты')
+				->set_default_value('Банковские реквизиты: BY00UNBS00000000000000000000, ОАО "Банк", БИК UNBSBY2X'),
 		));
 }
 

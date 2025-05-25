@@ -65,6 +65,49 @@ get_header();
           <?php get_template_part('template-parts/feedback-form'); ?>
         </section>
       </div>
+      <section class="owner-info">
+        <div class="content-container">
+          <h2 class="owner-info__title">Реквизиты индивидуального предпринимателя</h2>
+          <ul class="owner-info__list">
+            <li class="owner-info__item">
+              <span class="owner-info__label">Полное наименование ИП:</span>
+              <span class="owner-info__value"><?php echo esc_html(carbon_get_theme_option('crf_owner_fullname')); ?></span>
+            </li>
+            <li class="owner-info__item">
+              <span class="owner-info__label">Юридический адрес:</span>
+              <span class="owner-info__value"><?php echo esc_html(carbon_get_theme_option('crf_owner_legal_address')); ?></span>
+            </li>
+            <li class="owner-info__item">
+              <span class="owner-info__label">Фактический адрес:</span>
+              <span class="owner-info__value"><?php echo esc_html(carbon_get_theme_option('crf_owner_actual_address')); ?></span>
+            </li>
+            <li class="owner-info__item">
+              <span class="owner-info__label">Сведения о регистрации:</span>
+              <span class="owner-info__value"><?php echo esc_html(carbon_get_theme_option('crf_owner_registration_info')); ?></span>
+            </li>
+            <li class="owner-info__item">
+              <span class="owner-info__label">УНП:</span>
+              <span class="owner-info__value"><?php echo esc_html(carbon_get_theme_option('crf_owner_unp')); ?></span>
+            </li>
+            <li class="owner-info__item">
+              <span class="owner-info__label">Способы оплаты:</span>
+              <span class="owner-info__value"><?php echo esc_html(carbon_get_theme_option('crf_owner_payment_methods')); ?></span>
+            </li>
+          </ul>
+          <?php if ($bank_details = carbon_get_theme_option('crf_owner_bank_details')): ?>
+            <div class="owner-info__bank-details">
+              <strong>Банковские реквизиты:</strong><br>
+              <?php echo nl2br(esc_html($bank_details)); ?>
+            </div>
+          <?php endif; ?>
+          <?php if ($receipt_img = carbon_get_theme_option('crf_owner_receipt_sample')): ?>
+            <div class="owner-info__receipt-sample-img">
+              <strong>Образец кассового чека:</strong><br>
+              <img src="<?php echo esc_url($receipt_img); ?>" alt="Образец кассового чека" class="owner-info__receipt-img" loading="lazy"/>
+            </div>
+          <?php endif; ?>
+        </div>
+      </section>
       <section class="contacts-seo-text">
         <h2 class="visually-hidden">Аренда манипулятора — контакты</h2>
         <p>
