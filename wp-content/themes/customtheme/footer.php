@@ -135,6 +135,10 @@
                         'viber' => array(
                             'url' => carbon_get_theme_option('crf_social_viber'),
                             'label' => 'Viber'
+                        ),
+                        'whatsapp' => array(
+                            'url' => carbon_get_theme_option('crf_social_whatsapp'),
+                            'label' => 'WhatsApp'
                         )
                     );
 
@@ -146,7 +150,7 @@
                        target="_blank" 
                        rel="noopener noreferrer" 
                        aria-label="<?php echo esc_attr($data['label']); ?>">
-                       <?php echo carbon_get_theme_option('crf_social_' . $platform . '_icon'); ?>
+                       <?php echo $platform === 'whatsapp' ? carbon_get_theme_option('crf_social_whatsapp_icon') : carbon_get_theme_option('crf_social_' . $platform . '_icon'); ?>
                     </a>
                     <?php 
                         endif;

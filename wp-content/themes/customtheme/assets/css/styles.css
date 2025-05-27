@@ -290,6 +290,14 @@ body {
   background-color: #4c4292;
 }
 
+.header__social-link--whatsapp {
+  background-color: #25d366;
+}
+
+.header__social-link--whatsapp:hover {
+  background-color: #128c7e;
+}
+
 .header__social-link:hover {
   color: var(--primary-color);
 }
@@ -1214,7 +1222,20 @@ body {
 }
 
 .footer__info {
-  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  column-gap: 40px;
+  
+}
+
+@media screen and (min-width: 768px) {
+  .footer__info {
+    flex-direction: column;
+    column-gap: 0;
+    justify-content: flex-start;
+    max-width: 400px;
+  }
 }
 
 .footer__logo {
@@ -1283,6 +1304,14 @@ body {
 
 .footer__social-link--viber:hover {
   background-color: #4c4292;
+}
+
+.footer__social-link--whatsapp {
+  background-color: #25d366;
+}
+
+.footer__social-link--whatsapp:hover {
+  background-color: #128c7e;
 }
 
 .footer__social-icon {

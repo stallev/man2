@@ -50,6 +50,9 @@ get_header();
             <a href="<?php echo esc_url(carbon_get_theme_option('crf_social_viber')); ?>" class="contacts-social__link header__social-link--viber" aria-label="Viber">
               <?php echo carbon_get_theme_option('crf_social_viber_icon'); ?>
             </a>
+            <a href="<?php echo esc_url(carbon_get_theme_option('crf_social_whatsapp')); ?>" class="contacts-social__link header__social-link--whatsapp" aria-label="WhatsApp">
+              <?php echo carbon_get_theme_option('crf_social_whatsapp_icon'); ?>
+            </a>
           </div>
           <div class="contacts-info__cta">
             <?php echo esc_html(carbon_get_theme_option('crf_contacts_cta')); ?>

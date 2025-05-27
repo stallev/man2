@@ -38,7 +38,7 @@ function customtheme_register_service_post_type() {
         'label'               => __('Услуги', 'customtheme'),
         'description'         => __('Услуги компании', 'customtheme'),
         'labels'              => $labels,
-        'supports'            => array('title', 'thumbnail', 'excerpt'),
+        'supports'            => array('title', 'thumbnail'),
         'hierarchical'        => false,
         'public'              => true,
         'show_ui'             => true,
@@ -80,9 +80,9 @@ function customtheme_service_fields() {
         // ->where( 'post_id', '=', 28 )
         // ->where( 'post_type', 'IN',  array( 'service') )
         ->add_tab(__('Основная информация', 'customtheme'), array(
-            Field::make('text', 'crf_service_card_title', __('Заголовок карточки', 'customtheme'))
-                ->set_help_text(__('Заголовок карточки', 'customtheme'))
-                ->set_visible_in_rest_api(true),
+            // Field::make('text', 'crf_service_card_title', __('Заголовок карточки', 'customtheme'))
+            //     ->set_help_text(__('Заголовок карточки', 'customtheme'))
+            //     ->set_visible_in_rest_api(true),
 
             Field::make('text', 'crf_service_card_description', __('Описание карточки', 'customtheme'))
                 ->set_help_text(__('Описание карточки', 'customtheme'))
