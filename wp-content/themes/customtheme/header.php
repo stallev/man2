@@ -14,6 +14,15 @@
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-V9K3HJQ7NQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-V9K3HJQ7NQ');
+</script>
 
 <body <?php body_class(); ?>>
     <header class="header">

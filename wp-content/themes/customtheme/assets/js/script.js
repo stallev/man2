@@ -147,7 +147,7 @@ if(feedbackForm) {
 async function handleFormData(form) {
     const formData = new FormData(form);
     try {
-        const response = await fetch(feedbackForm.action, {
+        const response = await fetch(form.action, {
             method: 'POST',
             body: formData,
         });
@@ -156,7 +156,7 @@ async function handleFormData(form) {
 
         if (result.success) {
             alert(result.message || 'Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.');
-            feedbackForm.reset();
+            form.reset();
         } else {
             alert(result.message || 'Ошибка при отправке сообщения. Пожалуйста, попробуйте ещё раз.');
         }
@@ -279,6 +279,5 @@ if (document.body.classList.contains('page-animate-in')) {
           closeModal();
       });
   }
-  // Fancybox инициализация (автоматически по data-fancybox)
   })(); 
 

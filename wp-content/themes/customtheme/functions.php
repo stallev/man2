@@ -29,6 +29,7 @@ function create_faq_fields()
 }
 
 add_theme_support('post-thumbnails', array('post', 'page'));
+add_theme_support('title-tag');
 
 add_action('carbon_fields_register_fields', 'create_faq_fields');
 
