@@ -4,6 +4,119 @@
  *
  */ 
 get_header();
+
+// LocalBusiness + ContactPoint structured data
+$business_images = carbon_get_theme_option('crf_business_images');
+$image_urls = [];
+if ($business_images && is_array($business_images)) {
+    foreach ($business_images as $img) {
+        if (!empty($img['image'])) {
+            $url = wp_get_attachment_image_url($img['image'], 'full');
+            if ($url) $image_urls[] = $url;
+        }
+    }
+}
+$latitude = (float)carbon_get_theme_option('crf_contact_latitude');
+$longitude = (float)carbon_get_theme_option('crf_contact_longitude');
+$opening_hours = carbon_get_theme_option('crf_business_opening_hours_spec');
+$openingHoursSpecification = [];
+if ($opening_hours && is_array($opening_hours)) {
+    foreach ($opening_hours as $item) {
+        $days = $item['day_of_week'] ?? '';
+        $days = is_array($days) ? $days : [$days];
+        $openingHoursSpecification[] = [
+            '@type' => 'OpeningHoursSpecification',
+            'dayOfWeek' => $days,
+            'opens' => $item['opens'] ?? '08:00',
+            'closes' => $item['closes'] ?? '20:00',
+        ];
+    }
+} else {
+    $openingHoursSpecification[] = [
+        '@type' => 'OpeningHoursSpecification',
+        'dayOfWeek' => [
+            'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'
+        ],
+        'opens' => '08:00',
+        'closes' => '20:00',
+    ];
+}
+$contactpoints = carbon_get_theme_option('crf_contactpoints');
+$contactPointsArr = [];
+if ($contactpoints && is_array($contactpoints)) {
+    foreach ($contactpoints as $cp) {
+        $contactPointsArr[] = [
+            '@type' => 'ContactPoint',
+            'contactType' => $cp['type'] ?? 'customer support',
+            'telephone' => $cp['telephone'] ?? carbon_get_theme_option('crf_contact_phone'),
+            'email' => $cp['email'] ?? carbon_get_theme_option('crf_contact_email'),
+            'areaServed' => $cp['area_served'] ?? 'Могилёв и область',
+            'availableLanguage' => $cp['available_language'] ?? 'Russian',
+        ];
+    }
+} else {
+    $contactPointsArr[] = [
+        '@type' => 'ContactPoint',
+        'contactType' => 'customer support',
+        'telephone' => carbon_get_theme_option('crf_contact_phone'),
+        'email' => carbon_get_theme_option('crf_contact_email'),
+        'areaServed' => 'Могилёв и область',
+        'availableLanguage' => 'Russian',
+    ];
+}
+$business = [
+    '@context' => 'https://schema.org',
+    '@type' => 'LocalBusiness',
+    'name' => carbon_get_theme_option('crf_business_name'),
+    'image' => $image_urls,
+    'logo' => carbon_get_theme_option('crf_business_logo'),
+    'url' => carbon_get_theme_option('crf_business_url'),
+    'description' => carbon_get_theme_option('crf_business_description'),
+    'telephone' => carbon_get_theme_option('crf_contact_phone'),
+    'email' => carbon_get_theme_option('crf_contact_email'),
+    'servesCuisine' => carbon_get_theme_option('crf_business_serves_cuisine'),
+    'address' => [
+        '@type' => 'PostalAddress',
+        'streetAddress' => carbon_get_theme_option('crf_contact_address'),
+        'addressLocality' => 'Могилёв',
+        'addressRegion' => carbon_get_theme_option('crf_contact_region'),
+        'postalCode' => carbon_get_theme_option('crf_contact_postal_code'),
+        'addressCountry' => 'BY',
+    ],
+    'geo' => [
+        '@type' => 'GeoCoordinates',
+        'latitude' => $latitude,
+        'longitude' => $longitude,
+    ],
+    'priceRange' => carbon_get_theme_option('crf_business_price_range'),
+    'openingHours' => carbon_get_theme_option('crf_contacts_worktime'),
+    'openingHoursSpecification' => $openingHoursSpecification,
+    'contactPoint' => $contactPointsArr,
+];
+echo '<script type="application/ld+json">' . wp_json_encode($business, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
+
+// BreadcrumbList structured data
+$breadcrumb_items = [
+    [
+        '@type' => 'ListItem',
+        'position' => 1,
+        'name' => 'Главная',
+        'item' => home_url('/')
+    ],
+    [
+        '@type' => 'ListItem',
+        'position' => 2,
+        'name' => get_the_title(),
+        'item' => get_permalink()
+    ]
+];
+$breadcrumb_structured = [
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => $breadcrumb_items
+];
+echo '<script type="application/ld+json">' . wp_json_encode($breadcrumb_structured, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
+
 ?>
 
   <main class="contacts-main">

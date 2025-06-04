@@ -4,6 +4,29 @@
  *
  */ 
 get_header();
+
+// BreadcrumbList structured data
+$breadcrumb_items = [
+    [
+        '@type' => 'ListItem',
+        'position' => 1,
+        'name' => 'Главная',
+        'item' => home_url('/')
+    ],
+    [
+        '@type' => 'ListItem',
+        'position' => 2,
+        'name' => get_the_title(),
+        'item' => get_permalink()
+    ]
+];
+$breadcrumb_structured = [
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => $breadcrumb_items
+];
+echo '<script type="application/ld+json">' . wp_json_encode($breadcrumb_structured, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
+
 ?>
 
 <main class="equipment-main">

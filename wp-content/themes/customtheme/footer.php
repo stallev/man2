@@ -297,7 +297,7 @@
                     Я согласен на обработку персональных данных
                 </label>
             </div>
-            <button type="submit" class="modal__submit modal__submit--order">Отправить заявку</button>
+            <button type="submit" class="modal__submit" data-modal-open="submit-order-modal-button">Отправить заявку</button>
         </form>
     </div>
 </div>

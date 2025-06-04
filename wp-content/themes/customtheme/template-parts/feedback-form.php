@@ -21,5 +21,5 @@
             <?php echo esc_html(carbon_get_theme_option('crf_service_form_privacy_label')); ?>
         </label>
     </div>
-    <button type="submit" class="feedback-form__submit"><?php echo esc_html(carbon_get_theme_option('crf_service_form_submit_text')); ?></button>
+    <button type="submit" class="feedback-form__submit" data-modal-open="submit-feedback-button"><?php echo esc_html(carbon_get_theme_option('crf_service_form_submit_text')); ?></button>
 </form>

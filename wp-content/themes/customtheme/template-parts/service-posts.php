@@ -48,7 +48,7 @@ if (!empty($active_ids)) {
                         </div>
                         <div class="service-card__buttons">
                             <a href="<?php the_permalink(); ?>" class="service-card__link button-anim">Подробнее</a>
-                            <button class="service-card__button button-anim" data-service="<?php echo esc_attr(get_the_title()); ?>">
+                            <button class="service-card__button button-anim" data-modal-open="order-modal-button order-modal-button--service" data-service="<?php echo esc_attr(get_the_title()); ?>">
                                 <?php echo esc_html('Заказать' ?: carbon_get_post_meta(get_the_ID(), 'crf_service_order_button_label')); ?>
                             </button>
                         </div>

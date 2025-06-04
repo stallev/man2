@@ -37,7 +37,7 @@ function crb_register_common_fields() {
 			Field::make('text', 'crf_contact_email', 'Email адрес')
 				->set_default_value('info@example.com'),
 			Field::make('text', 'crf_contact_address', 'Адрес')
-				->set_default_value('г. Могилёв, ул. Примерная, 123'),
+				->set_default_value('г. Могилёв, ул. Э. Волосевича, д. 19'),
 			Field::make('text', 'crf_contact_latitude', 'Широта')
 				->set_default_value('53.9000')
 				->set_help_text('Введите широту в формате 53.9000'),
@@ -140,6 +140,46 @@ function crb_register_common_fields() {
 				))
 				->set_max(20)
 				->set_help_text('Выберите и отсортируйте услуги, которые должны отображаться на странице. Только отмеченные услуги будут видны посетителям.'),
+
+			// LocalBusiness structured data
+			Field::make('html', 'group_business_title')->set_html('<h3 style="margin-top:2em;">LocalBusiness structured data</h3>'),
+			Field::make('text', 'crf_business_name', 'Название организации')
+				->set_default_value('Аренда манипулятора в Могилёве'),
+			Field::make('text', 'crf_business_logo', 'Логотип (URL)')
+				->set_default_value(get_template_directory_uri() . '/favicon-96x96.png'),
+			Field::make('text', 'crf_business_url', 'URL сайта')
+				->set_default_value(home_url('/')),
+			Field::make('textarea', 'crf_business_description', 'Описание организации')
+				->set_default_value('Услуги манипулятора, перевозка грузов, аренда спецтехники в Могилёве и области. Оперативно, профессионально, выгодно.'),
+			Field::make('text', 'crf_business_price_range', 'Ценовой диапазон')
+				->set_default_value('BYN 50-500'),
+			Field::make('complex', 'crf_business_images', 'Изображения организации')
+				->add_fields(array(
+					Field::make('image', 'image', 'Изображение')
+				)),
+			Field::make('text', 'crf_contact_region', 'Регион/Область')
+				->set_default_value('Могилёвская область'),
+			Field::make('text', 'crf_contact_postal_code', 'Почтовый индекс')
+				->set_default_value('212032'),
+			Field::make('text', 'crf_business_serves_cuisine', 'Тип предоставляемых услуг (servesCuisine)')
+				->set_default_value('Услуги спецтехники, перевозка грузов'),
+			Field::make('complex', 'crf_business_opening_hours_spec', 'Расписание работы (OpeningHoursSpecification)')
+				->add_fields(array(
+					Field::make('text', 'day_of_week', 'День недели (en)')
+						->set_default_value('Monday'),
+					Field::make('text', 'opens', 'Открытие (чч:мм)')
+						->set_default_value('08:00'),
+					Field::make('text', 'closes', 'Закрытие (чч:мм)')
+						->set_default_value('20:00'),
+				)),
+			Field::make('complex', 'crf_contactpoints', 'Контактные точки (ContactPoint)')
+				->add_fields(array(
+					Field::make('text', 'type', 'Тип контакта (например, customer support)')->set_default_value('customer support'),
+					Field::make('text', 'telephone', 'Телефон')->set_default_value('+375336585585'),
+					Field::make('text', 'email', 'Email')->set_default_value('info@example.com'),
+					Field::make('text', 'area_served', 'Область обслуживания')->set_default_value('Могилёв и область'),
+					Field::make('text', 'available_language', 'Язык обслуживания')->set_default_value('Russian'),
+				)),
 		))
 		->add_tab('Главная страница', array(
 			// Hero-блок

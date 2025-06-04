@@ -14,6 +14,35 @@ get_header();
                     <li class="breadcrumbs__item"><span class="breadcrumbs__current"><?php the_title(); ?></span></li>
                 </ul>
             </nav>
+            <?php
+            // JSON-LD structured data для BreadcrumbList
+            $breadcrumb_items = [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Главная',
+                    'item' => home_url('/')
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'Услуги',
+                    'item' => home_url('/services-list')
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 3,
+                    'name' => get_the_title(),
+                    'item' => get_permalink()
+                ]
+            ];
+            $breadcrumb_structured = [
+                '@context' => 'https://schema.org',
+                '@type' => 'BreadcrumbList',
+                'itemListElement' => $breadcrumb_items
+            ];
+            echo '<script type="application/ld+json">' . wp_json_encode($breadcrumb_structured, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
+            ?>
             <h1 class="service-title"><?php the_title(); ?></h1>
             <div class="service-desc">
                 <?php echo wp_kses_post(carbon_get_post_meta(get_the_ID(), 'crf_service_description')); ?>
@@ -96,6 +125,32 @@ get_header();
                     ?>
                 </div>
             </section>
+            <?php
+            // JSON-LD structured data для FAQ
+            $faqs = carbon_get_post_meta(get_the_ID(), 'crf_service_faq');
+            if (!empty($faqs)) {
+                $faq_structured = [
+                    "@context" => "https://schema.org",
+                    "@type" => "FAQPage",
+                    "mainEntity" => []
+                ];
+                foreach ($faqs as $faq) {
+                    if (!empty($faq['question']) && !empty($faq['answer'])) {
+                        $faq_structured['mainEntity'][] = [
+                            "@type" => "Question",
+                            "name" => wp_strip_all_tags($faq['question']),
+                            "acceptedAnswer" => [
+                                "@type" => "Answer",
+                                "text" => wp_strip_all_tags($faq['answer'])
+                            ]
+                        ];
+                    }
+                }
+                if (!empty($faq_structured['mainEntity'])) {
+                    echo '<script type="application/ld+json">' . wp_json_encode($faq_structured, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . '</script>';
+                }
+            }
+            ?>
             <section class="service-feedback">
                 <h2 class="section-title"><?php echo esc_html(carbon_get_theme_option('crf_service_form_title')); ?></h2>
                 <?php get_template_part('template-parts/feedback-form'); ?>
