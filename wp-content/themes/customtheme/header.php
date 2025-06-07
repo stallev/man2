@@ -11,21 +11,24 @@
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/apple-touch-icon.png" />
     <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/site.webmanifest" />
-    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <meta name="google-site-verification" content="rbPoUXec2WpQbEnN1fPxvXx16CrI_Jx8mG8JvrSEkV8" />
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V9K3HJQ7NQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MZPXTCXN');</script>
+<!-- End Google Tag Manager -->
 
-  gtag('config', 'G-V9K3HJQ7NQ');
-</script>
-
-<body <?php body_class(); ?>>
-    <header class="header">
+<body 
+	  <?php body_class(); ?>>
+   <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZPXTCXN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+	<header class="header">
         <div class="header__container">
             <a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo">
                 <?php 
@@ -192,8 +195,8 @@
                     foreach ($social_links as $platform => $data):
                         if ($data['url']):
                     ?>
-                    <a href="<?php echo esc_url($data['url']); ?>" 
-                       class="header__social-link header__social-link--<?php echo esc_attr($platform); ?>" 
+                    <a href="<?php echo $data['url']; ?>" 
+                       class="header__social-link header__social-link--<?php echo $platform; ?>" 
                        target="_blank" 
                        rel="noopener noreferrer" 
                        aria-label="<?php echo esc_attr($data['label']); ?>">

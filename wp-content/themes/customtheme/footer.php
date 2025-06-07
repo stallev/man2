@@ -59,7 +59,7 @@
                             <path transform="translate(1068,269)" d="m0 0 7 6 8 7 68 68 8 4v-12h1l1 6v9l-5-1-9-5-5-5-1-3-4-2-2-2h-3v-2h-2l-1-6-4-2-9-10-5-5-10-9-6-7-3-2v-2h-2l-7-8-5-6-2-1v-2l-4-2-4-4z" fill="#302E32"/>
                             <path transform="translate(813,47)" d="m0 0h6v2l9 2h2v2l2 1v2h2v2l-3 1-12-5-10 1-10 3-10 9-4 6-2 6-1 7-1-3h-2l1-6 3-8 2-6h3v-3l5-2 1-3h4v-2h2l2-2 6 1-1-4z" fill="#2F2D31"/>
                             <path transform="translate(178,296)" d="m0 0h1l1 6v51l-1 11h-1v-8l-3 1-2-2v-11l1-4 1-24h2l-1-10z" fill="#302E32"/>
-                            <path transform="translate(470,738distinctive 738)" d="m0 0h1l2 12-3 5-2-1h-125l-7-1v-1h134z" fill="#312F33"/>
+                            <path transform="translate(470,738)" d="m0 0h1l2 12-3 5-2-1h-125l-7-1v-1h134z" fill="#312F33"/>
                             <path transform="translate(732,67)" d="m0 0h2v2h-2l-1 3-10 5h-3v2l-5 2h-1v2l-5 2-3 5h-3v-2h-3l-1-3 4-4 20-9z" fill="#302E32"/>
                             <path transform="translate(1712,1075)" d="m0 0 5 1 16 8 16 12 9 8 1 3h-2l-5-5-4-3-7-3-12-8-4-5-8-4-3-1v-2z" fill="#302E32"/>
                             <path transform="translate(727,1073)" d="m0 0 6 1 16 8 12 7 11 9 7 8h-3v-2l-4-2-10-8-10-5-4-4-6-4v2h-2l-2-4-2 1v-2l-5-2z" fill="#312F33"/>
@@ -145,7 +145,7 @@
                     foreach ($social_links as $platform => $data):
                         if ($data['url']):
                     ?>
-                    <a href="<?php echo esc_url($data['url']); ?>" 
+                    <a href="<?php echo $data['url']; ?>" 
                        class="footer__social-link footer__social-link--<?php echo esc_attr($platform); ?>" 
                        target="_blank" 
                        rel="noopener noreferrer" 
